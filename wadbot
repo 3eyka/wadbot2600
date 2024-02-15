@@ -1,0 +1,62 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "USAGE : ./wadbot [push | sentinel]"
+    exit 0
+fi
+
+argument="$1"
+
+if [ "$argument" = "push" ]; then
+    echo "wadbot na blyat ski pushi zjinya"
+elif [ "$argument" = "sentinel" ]; then
+    echo "wadbot na blyat ya ore no [S A N T I N E R U]-sama"
+else
+    echo "USAGE : ./wadbot [push | sentinel]"
+    exit 0
+fi
+
+# donne ton nom... uwu
+echo "Prenom (don't forget les majuscules) :"
+read prenom
+echo "Nom (don't forget les majuscules) :"
+read nom
+# num de l'exo asr
+echo "ASR [2, 3, 4, 5, 11, 12] :"
+read asr_nbr
+# message de commit
+echo "commit message :"
+read cummit
+# config global username, email, et setup persistence Git (pour le repo, creds stockées dans gitconfig, delete a la fin du script)
+git config --global user.name "${prenom} ${nom}"
+git config --global user.email "${prenom}.${nom}@ecole2600.com"
+git config --global credential.helper store
+# craft du lien gitea
+fullpath="https://git.ecole2600.com/promo2026_RNCP35612/${prenom}.${nom}_asr-exos-${asr_nbr}-2025.git"
+# git clone l'exo ASR, a ton nom (oui y'a touujours les MAJ dans le nom/prenom, mais ca change absolument que dalle)
+git clone $fullpath
+# cd dans le seul dossier pouvant contenir "2025"
+cd "${prenom}.${nom}_asr-exos-${asr_nbr}-2025/"
+# cd dans le seul dossier du projet, donc pas de risques a taper un *
+# cd *
+# on chope [S A N T I N E R U]
+curl https://sentinel.ecole2600.com/download/latest -o sentinel
+# on chmod [S A N T I N E R U] 
+chmod +x sentinel
+# git add
+git add .
+# git cum - msg
+git commit -m "${cummit}"
+
+if [ "$argument" = "push" ]; then
+    git push
+elif [ "$argument" = "sentinel" ]; then
+    ./sentinel
+fi
+
+# final cleanup, rmrf du repo, ainsi que du gitconfig
+cd ../
+rm -rf "${prenom}.${nom}_asr-exos-${asr_nbr}-2025/"
+rm -rf .gitconfig
+
+echo "WADBOT COMPLETE."
