@@ -47,16 +47,3 @@ chmod +x sentinel
 git add .
 # git cum - msg
 git commit -m "${cummit}"
-
-if [ "$argument" = "push" ]; then
-    git push
-elif [ "$argument" = "sentinel" ]; then
-    ./sentinel
-fi
-
-# final cleanup, rmrf du repo, ainsi que du gitconfig
-cd ../
-rm -rf "${prenom}.${nom}_asr-exos-${asr_nbr}-2025/"
-rm -rf .gitconfig
-
-echo "WADBOT COMPLETE."
