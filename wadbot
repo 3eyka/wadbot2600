@@ -40,5 +40,7 @@ fi
 cd ../
 rm -rf "${prenom}.${nom}_asr-exos-${asr_nbr}-2025/"
 rm -rf .gitconfig
+git config --global --unset credential.helper
+rm -rf .git-credentials
 
 echo "WADBOT COMPLETE."
