@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# script sympa pour ne pas avoir a rentrer ses creds 500 fois pour sentinel ASR :))))))))
+
 if [ $# -eq 0 ]; then
     echo "USAGE : ./wadbot [push | sentinel]"
     exit 0
@@ -13,37 +15,14 @@ else
     echo "USAGE : ./wadbot [push | sentinel]"
     exit 0
 fi
-echo "Prenom (don't forget les majuscules) :"
+echo "Prenom :"
 read prenom
-echo "Nom (don't forget les majuscules) :"
+echo "Nom :"
 read nom
 
-echo "Exos ?"
-echo "1 - C"
-echo "2 - ASM"
-echo "3 - Python"
-echo "4 - ASR"
-echo "5 - DB"
+echo "Exo"
 echo "--> "
 read repo
-if [ "$repo" = "1" ]; then
-    echo "C selected."
-    $repo="c"
-elif [ "$repo" = "2" ]; then
-    echo "ASM selected."
-    $repo="asm"
-elif [ "$repo" = "3" ]; then
-    echo "Python selected."
-    $repo="pythonsec"
-elif [ "$repo" = "4" ]; then
-    echo "ASR selected."
-    $repo="asr"
-elif [ "$repo" = "5" ]; then
-    echo "DB selected."
-    $repo="db"
-else
-    echo "custom repo name set."
-fi
 
 echo "Quel exo ${repo} ? :"
 read asr_nbr
