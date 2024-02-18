@@ -17,17 +17,46 @@ echo "Prenom (don't forget les majuscules) :"
 read prenom
 echo "Nom (don't forget les majuscules) :"
 read nom
-echo "ASR [2, 3, 4, 5, 11, 12] :"
+
+echo "Exos ?"
+echo "1 - C"
+echo "2 - ASM"
+echo "3 - Python"
+echo "4 - ASR"
+echo "5 - DB"
+echo "--> "
+read repo
+if [ "$repo" = "1" ]; then
+    echo "C selected."
+    $repo="c"
+elif [ "$repo" = "2" ]; then
+    echo "ASM selected."
+    $repo="asm"
+elif [ "$repo" = "3" ]; then
+    echo "Python selected."
+    $repo="pythonsec"
+elif [ "$repo" = "4" ]; then
+    echo "ASR selected."
+    $repo="asr"
+elif [ "$repo" = "5" ]; then
+    echo "DB selected."
+    $repo="db"
+else
+    echo "custom repo name set."
+fi
+
+echo "Quel exo ${repo} ? :"
 read asr_nbr
-echo "commit message :"
+echo "nom du commit :"
 read cummit
 git config --global user.name "${prenom} ${nom}"
 git config --global user.email "${prenom}.${nom}@ecole2600.com"
 git config --global credential.helper store
-fullpath="https://git.ecole2600.com/promo2026_RNCP35612/${prenom}.${nom}_asr-exos-${asr_nbr}-2025.git"
+
+fullpath="https://git.ecole2600.com/promo2026_RNCP35612/${prenom}.${nom}_${repo}-exos-${asr_nbr}-2025.git"
 git clone $fullpath
 
-cd "${prenom}.${nom}_asr-exos-${asr_nbr}-2025/"
+cd "${prenom}.${nom}_${repo}-exos-${asr_nbr}-2025/"
 curl https://sentinel.ecole2600.com/download/latest -o sentinel
 chmod +x sentinel
 git add .
@@ -38,7 +67,7 @@ elif [ "$argument" = "sentinel" ]; then
     ./sentinel
 fi
 cd ../
-rm -rf "${prenom}.${nom}_asr-exos-${asr_nbr}-2025/"
+rm -rf "${prenom}.${nom}_${repo}-exos-${asr_nbr}-2025/"
 rm -rf .gitconfig
 git config --global --unset credential.helper
 rm -rf .git-credentials
